@@ -1,8 +1,20 @@
-import React from "react";
-import "./styles.css";
+import React from 'react';
+import './styles.css';
+import DeckContainer from './components/DeckContainer/DeckContainer';
 
-function App() {
-  return <div id="AppContainer"></div>;
-}
+const App = () => {
+  // get decks array from backend
+  const decks = [];
+  backendResponse.map((deck) => decks.push(<Deck />));
+
+  return (
+    // NavBar
+    //
+    <div id="AppContainer">
+      <NavBar />
+      <DeckContainer />
+    </div>
+  );
+};
 
 export default App;
