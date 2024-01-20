@@ -9,7 +9,7 @@ const DeckContainer = () => {
     <div>
       {/* have an input field and an add deck button */}
       <div>
-        <input placeholder="Enter deck name"></input>
+        <input type="text" placeholder="Enter deck name"></input>
         <button>Add deck</button>
       </div>
 
