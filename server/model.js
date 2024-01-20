@@ -1,9 +1,8 @@
 const mongoose = require('mongoose');
+require('dotenv').config();
 
 mongoose
-  .connect(
-    'mongodb+srv://yanbriann:ULdkHCjbk5bNNDOX@cluster0.5kpesct.mongodb.net/?retryWrites=true&w=majority'
-  )
+  .connect(process.env.MONGODB_URI)
   .then(() => console.log('connected to Flashcard model'))
   .catch((err) => console.log(err));
 

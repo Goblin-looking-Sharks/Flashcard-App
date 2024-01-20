@@ -4,5 +4,5 @@ Log:
     -npm installed mongoDb and mongoose
     -set up model.js on the server directory
     -created a cluster on mongodb 
-        -pw: ULdkHCjbk5bNNDOX
-        -mongoURI : mongodb+srv://yanbriann:ULdkHCjbk5bNNDOX@cluster0.5kpesct.mongodb.net/?retryWrites=true&w=majority
+    -added .env
+  
