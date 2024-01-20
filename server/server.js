@@ -3,6 +3,8 @@ const cors = require('cors');
 const path = require('path');
 const app = express();
 const PORT = 3000;
+const mongoose = require('mongoose');
+const Topics = require('./model.js');
 
 // Parse JSON incoming
 app.use(express.json());
