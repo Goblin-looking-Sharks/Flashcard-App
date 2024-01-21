@@ -44,7 +44,7 @@ const Card = () => {
   const deletedCardID = JSON.stringify(cards[index]._id); // not sure if _id is the key for the id value (in the card object)
 
   const handleDelete = async (e) => {
-    await fetch(`http://localhost:3000/deck/${currentDeckID}`, {
+    await fetch(`http://localhost:3000/deck/${currentDeckID}/card`, {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
       body: deletedCardID,
