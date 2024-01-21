@@ -59,7 +59,7 @@ router.delete('/:deckId/card', async (req, res) => {
     // if (!card) {
     //   return res.status(404).json({ error: 'Could not find card' });
     // }
-    console.log('deleted card');
+    // console.log('deleted card');
     res.redirect('/');
   } catch (error) {
     console.log('Error deleting card');
