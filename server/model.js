@@ -3,9 +3,9 @@ const mongoose = require('mongoose');
 require('dotenv').config(); 
 
 //connects to online DB
-mongoose.connect(process.env.MONGODB_URI)
-.then(console.log('connected to flashcards database')
-.catch((err) => console.log(err)));
+mongoose.connect(process.env.MONGODB_URI, {dbName: 'Flashcards'})
+.then(console.log('connected to flashcards database'));
+// .catch((err) => console.log(err))); **** fix this *****
 
 
 //create a schema for our cards
@@ -20,4 +20,12 @@ const deckSchema = new mongoose.Schema({
     cards: [cardSchema] // array of cards, each card is an obj
 });
 
-module.exports = mongoose.model('Deck', deckSchema);
+// const Deck = mongoose.model('Deck', deckSchema);
+// // const Card = mongoose.model('Card', cardSchema, 'Deck');
+
+// module.exports = {
+//     Deck,
+//     // Card,
+// };
+
+module.exports = mongoose.model('Deck', deckSchema, 'Deck');
