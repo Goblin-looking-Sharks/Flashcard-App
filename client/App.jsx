@@ -4,9 +4,9 @@ import DeckContainer from './components/DeckContainer/DeckContainer';
 
 const App = () => {
   return (
-    // NavBar
-    //
-    <div id="AppContainer">
+    // Need to install React Router, import it, and add it with the switch statements to this component
+
+    <div id='AppContainer'>
       <NavBar />
       <DeckContainer />
     </div>
