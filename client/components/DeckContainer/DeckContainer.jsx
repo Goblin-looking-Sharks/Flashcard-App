@@ -1,11 +1,12 @@
 import React from 'react';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { loadDecks, addDeck, deleteDeck } from '../../redux/decksSlice';
 import Deck from '../Deck/Deck.jsx';
 
 // create component body
 const DeckContainer = () => {
+  const [newDeck, setNewDeck] = useState('');
   const dispatch = useDispatch();
 
   // We need to set up 3 event handler functions for the Deck div, addDeck button and deleteDeck button
@@ -15,14 +16,19 @@ const DeckContainer = () => {
   // Delete deck button: DELETE request to backend endpoint
 
   const getDecks = async () => {
+    console.log('in get Decks');
     const response = await fetch('http://localhost:3000/');
+    console.log('response body:', response.body);
+    const body = await response.json();
+    console.log('status', response.status);
+    dispatch(loadDecks(body));
+    // if (response.status === 200) {
+    //   console.log('response is 200');
 
-    if (response.status === 200) {
-      const body = await response.json();
-      // (I think we will receive back an array of deck object(s))
+    //   console.log('body', body);
+    //   // (I think we will receive back an array of deck object(s))
 
-      dispatch(loadDecks(body));
-    }
+    // }
   };
 
   useEffect(() => {
@@ -31,6 +37,7 @@ const DeckContainer = () => {
 
   // retreive decks from store
   const decks = useSelector((state) => state.decks.decks);
+  console.log('decks', decks);
 
   // create functionality to map through backendResponse and have new mapped
   const renderedDecks = decks.map(
@@ -48,13 +55,16 @@ const DeckContainer = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const newDeck = JSON.stringify(e.target.value);
+    const newDeckString = JSON.stringify(newDeck);
+    console.log(newDeckString);
 
-    const response = await fetch('http://localhost:3000/', {
+    const response = await fetch('http://localhost:3000/decks', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: newDeck,
+      body: newDeckString,
     });
+
+    console.log('response.status', response.status);
 
     if (response.status === 200) getDecks();
 
@@ -66,7 +76,11 @@ const DeckContainer = () => {
     <div>
       {/* have an input field and an add deck button */}
       <form onSubmit={handleSubmit}>
-        <input type='text' placeholder='Enter deck name'></input>
+        <input
+          type='text'
+          placeholder='Enter deck name'
+          onChange={(e) => setNewDeck(e.target.value)}
+        ></input>
         <button type='submit'>Add deck</button>
       </form>
 
