@@ -1,34 +1,48 @@
 import React from 'react';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectDeck, loadCards, addCard, deleteCard } from '../../redux/currentDeckSlice'
 
 const Card = () => {
   // get current card array from the global store
-  // const cards = useSelector()
-
-  // piece of state: get the index (of the current card) (starts at zero)
-  const [isFront, setIsFront] = useState(true);
+  const cards = useSelector((state) => state.currentDeck.cards);
 
   // piece of state: get the boolean
-  let card = cards[currentIndex];
-  if (isFront) {
-    content = card.front;
-  } else {
-    content = card.back;
+  const [isFront, setIsFront] = useState(true);
+  // piece of state: get the index (of the current card) (starts at zero)
+  const [index, setIndex] = useState(0);
+
+  // Get current card using index
+  let hasCards = cards.length !== 0;
+  
+  if (hasCards) {
+    let cardContent;
+    let card = cards[index];
+    if (isFront) {
+        cardContent = card.front;
+    } else {
+        cardContent = card.back;
   }
+  }
+  
+  // We need to set up 2 event handler functions for the addCard and deleteCard buttons
+  // These functions will each contain fetch requests
+  // Add card: GET request to form page
+  // Delete card: DELETE request to backend endpoint
+
   return (
     <div>
-        <button>Add card</button>
-      <button onClick={}>
-        {/* Front or back content depending on state */}
-        {content}
-      </button>
+        <button onClick={}>Add card</button>
+      {!hasCards && <button onClick={(e) => setIsFront(!isFront)}>
+        {/* Front or back cardContent depending on state */}
+        {cardContent}
+      </button>}
 
-      <button>Delete</button>
+      <button disabled={!hasCards} onClick={}>Delete</button>
 
       <div>
-        <button>Back</button>
-        <button>Next</button>
+        <button disabled={!hasCards || index === 0} onClick={(e) => setIndex(index--)}>Back</button>
+        <button disabled={!hasCards || index === cards.length - 1 } onClick={(e) => setIndex(index++)}>Next</button>
       </div>
 
     </div>

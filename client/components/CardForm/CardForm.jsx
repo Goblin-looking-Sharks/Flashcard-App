@@ -1,7 +1,7 @@
 import React from 'react';
 
 const CardForm = () => {
-// create handler function for onSubmit (will need to make a fetch request)
+// Create handler function for onSubmit (will need to make a fetch request)
 
   return (
     <form onSubmit={}>
