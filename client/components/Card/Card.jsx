@@ -49,6 +49,7 @@ const Card = () => {
       headers: { 'Content-Type': 'application/json' },
       body: deletedCardID,
     });
+    // backend should redirect to `http://localhost:3000/deck/${currentDeckID}`
   };
 
   return (

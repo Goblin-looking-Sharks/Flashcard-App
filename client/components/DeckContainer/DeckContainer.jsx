@@ -1,7 +1,7 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { loadDeck, addDeck, deleteDeck } from '../../redux/decksSlice';
+import { loadDecks, addDeck, deleteDeck } from '../../redux/decksSlice';
 import Deck from '../Deck/Deck.jsx';
 
 // create component body
@@ -21,7 +21,7 @@ const DeckContainer = () => {
       const body = await response.json();
       // (I think we will receive back an array of deck object(s))
 
-      dispatch(loadDeck(body));
+      dispatch(loadDecks(body));
     }
   };
 
@@ -35,7 +35,9 @@ const DeckContainer = () => {
   // create functionality to map through backendResponse and have new mapped
   const renderedDecks = decks.map(
     // not sure if _id is the key for the id value (in the deck object)
-    (deck, index) => <Deck key={deck._id} deck={deck} index={index} />
+    (deck, index) => (
+      <Deck key={deck._id} deck={deck} index={index} getDecks={getDecks} />
+    )
     // (deck, index) => (<div id={`deck${index}`} onClick={}>
     //     {deck.deckName}
     //     <button onClick={}>Delete</button>
@@ -56,8 +58,8 @@ const DeckContainer = () => {
 
     if (response.status === 200) getDecks();
 
-    // invoke our reducer (maybe loadDeck instead of addDeck?)
-    // dispatch(loadDeck(body));
+    // invoke our reducer (maybe loadDecks instead of addDeck?)
+    // dispatch(loadDecks(body));
   };
 
   return (

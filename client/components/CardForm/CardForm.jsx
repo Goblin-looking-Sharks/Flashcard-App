@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   selectDeck,
@@ -8,17 +9,25 @@ import {
 } from '../../redux/currentDeckSlice';
 
 const CardForm = () => {
+  const [cardFront, setCardFront] = useState('');
+  const [cardBack, setCardBack] = useState('');
+
   const currentDeckID = useSelector((state) => state.currentDeck.id);
   // Create handler function for onSubmit (will need to make a fetch request)
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const newCard = JSON.stringify(currentDeckID);
+    const newCard = {
+      front: cardFront,
+      back: cardBack,
+    };
+
+    const newCardString = JSON.stringify(newCard);
 
     await fetch(`http://localhost:3000/deck/${currentDeckID}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: currentDeckID,
+      body: newCardString,
     });
 
     // redirect will need to occur from server (Automatically?)
@@ -31,6 +40,7 @@ const CardForm = () => {
           type='text'
           name='cardFront'
           placeholder='Enter card front content'
+          onChange={(e) => setCardFront(e.target.value)}
           required
         />
         Front of card
@@ -40,6 +50,7 @@ const CardForm = () => {
           type='text'
           name='cardBack'
           placeholder='Enter card back content'
+          onChange={(e) => setCardBack(e.target.value)}
           required
         />
         Back of card

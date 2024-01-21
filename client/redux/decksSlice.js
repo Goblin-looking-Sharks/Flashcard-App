@@ -6,7 +6,7 @@ export const decksSlice = createSlice({
     decks: [],
   },
   reducers: {
-    loadDeck: (state, action) => {
+    loadDecks: (state, action) => {
       state.decks = action.payload;
     },
     addDeck: (state, action) => {
@@ -20,6 +20,6 @@ export const decksSlice = createSlice({
   },
 });
 
-export const { loadDeck, addDeck, deleteDeck } = decksSlice.actions;
+export const { loadDecks, addDeck, deleteDeck } = decksSlice.actions;
 
 export default decksSlice.reducer;
