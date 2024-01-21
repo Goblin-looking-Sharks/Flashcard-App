@@ -27,7 +27,7 @@ app.get('/', function (req, res) {
 //use controllers
 console.log('this is right before deck controller');
 app.use('/', deckController);
-app.use('/deck/:deckId', cardController); //may not work with ':', double-check here
+app.use('/deck', cardController); 
 
 // Serve 404 error to all other unknown routes
 app.use('*', (req, res) => res.status(404).send('Page not found'));

@@ -8,7 +8,7 @@ const router = require('express').Router();
 //     //check if this is correct! 
 //     return res.status(200).sendFile(path.resolve(__dirname, ''));
 // });
-console.log('hello')
+
 //create a new deck in the database
 //POST '/api/deck'
 //deck info will be sent in req body
@@ -37,19 +37,38 @@ router.post('/', (req, res, next) => {
 //DELETE '/api/deck'
 //deck info will be in req param deckName?
 //send success status code in router in server.js
-router.delete('/', (req, res, next) => {
-    Deck.deleteOne({deckName: req.params.name}) //check if name correct
+router.delete('/deck/:deckId', async (req, res, next) => {
+    // try {
+    //     const data = await Deck.deleteOne({deckName: req.params.deckName});
+    //     if (data.deletedCount === 0){
+    //         return next({
+    //             log: 'Express error handler caught in DeckController.delete',
+    //             status: 400,
+    //             message: {error: 'Deck not found'},
+    //         });
+    //     }
+    //     res.locals.message = 'Deleted ' + data.deletedCount + ' deck';
+    //     return res.status(200).json(res.locals.message);
+    // } catch (error) {
+    //     return next({
+    //         log: 'Express error handler caught in DeckController.delete',
+    //         status: 400,
+    //         message: { error: `${error}` },
+    //     });
+    // }
+    const deckId = req.params.deckId;
+    await Deck.findByIdAndDelete(deckId)
     .then((data) => {
         //if desk doesn't exisit
-        if (!data) {
+        if (data.deletedCount === 0) {
             return next({
                 log: 'Express error handler caught in DeckController.delete',
                 status: 400,
-                message: {error: `${error}`},
+                message: {error: 'Deck not found'},
             });
         };
         //if deck exists
-        res.locals.message = 'Deleted ' + data.deletedCount + 'deck';
+        res.locals.message = 'Deleted deck';
         return res.status(200).json(res.locals.message);
     })
     .catch((error) => {
@@ -65,8 +84,9 @@ router.delete('/', (req, res, next) => {
 //GET '/deck/:deckId/' then redirect to '/deck/:deckId/card' on CardController.js
 //deck name will be in the req param deckName?
 //send deck in routers in server.js
-router.get('/', (req, res, next) => {
-    Deck.findOne({deckName: req.params.name}) //check if name correct
+router.get('/deck/:deckId', async (req, res, next) => {
+    const deckId = req.params.deckId;
+    await Deck.findById(deckId)
     .then((data) => {
         //if deck doesn't exist
         if(!data) {
@@ -76,6 +96,7 @@ router.get('/', (req, res, next) => {
                 message: {error: `${error}`},
             });
         };
+        console.log('Found Deck');
         //if deck exists, redirect to '/deck/:deckId/card'
         res.redirect(200, '/deck/:deckId/card');
         // res.locals.getDeck = data;
