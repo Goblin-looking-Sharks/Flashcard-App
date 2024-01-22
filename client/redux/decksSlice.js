@@ -3,18 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 export const decksSlice = createSlice({
   name: 'decks',
   initialState: {
-    decks: [
-      {
-        _id: '8217382173827',
-        deckName: 'Frontend test',
-        cards: [
-          {
-            front: 'front',
-            back: 'back',
-          },
-        ],
-      },
-    ],
+    decks: [],
   },
   reducers: {
     loadDecks: (state, action) => {

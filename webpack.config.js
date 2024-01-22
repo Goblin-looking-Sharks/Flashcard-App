@@ -4,6 +4,7 @@ const HTMLWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   entry: './client/index.js',
   output: {
+    publicPath: '/',
     path: path.join(__dirname, '/dist'),
     filename: 'bundle.js',
   },
@@ -43,5 +44,6 @@ module.exports = {
   },
   devServer: {
     port: 8080,
+    historyApiFallback: true,
   },
 };
