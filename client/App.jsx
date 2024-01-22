@@ -17,7 +17,7 @@ const Layout = () => {
   );
 };
 
-const NotFound = () => <h1>Page not found</h1>;
+const NotFound = () => <h1>404 Page not found</h1>;
 
 const App = () => {
   useEffect(() => {
