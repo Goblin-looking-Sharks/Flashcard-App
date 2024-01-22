@@ -5,7 +5,7 @@
 body {
   margin: 0;
   position: relative;
-  background-color: white;
+  background-color: #ebecee;
   font-family: 'Proxima Nova', 'San Francisco', arial, sans-serif;
   color: #1d1d1d;
 }
@@ -22,4 +22,263 @@ li {
 a {
   text-decoration: none;
   color: black;
+}
+
+.NavBar {
+  /* position: fixed; */
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 10.8rem 1rem 8.5rem;
+  background-color: #2dc6f2;
+}
+
+.menuDiv {
+  display: flex;
+  align-items: center;
+}
+
+.menu {
+  display: flex;
+}
+
+.menu li {
+  margin: 0 2.2rem;
+  color: white;
+  align-self: center;
+}
+
+.logo {
+  color: white;
+  font-family: cursive;
+  font-size: 1.5rem;
+}
+
+.searchBar {
+  width: 17rem;
+  height: 2.2rem;
+  background-color: #6ed0f4;
+  border: none;
+  border-radius: 0.4rem;
+  color: white;
+  padding: 0 1rem;
+}
+
+.searchBar::placeholder {
+  color: white;
+  font-size: 0.8rem;
+}
+
+.DeckContainer {
+  background-color: #ebecee;
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.formDiv {
+  /* padding: 7.5rem 0; */
+  padding: 2.5rem 0;
+}
+
+.deckSquare {
+  width: 17rem;
+  height: 20rem;
+  background-color: #01b0ef;
+  border-radius: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.1);
+}
+
+.deckSquare h2 {
+  font-size: 4.5rem;
+  color: white;
+}
+
+.addNewDeck {
+  padding: 0.8rem 0.4rem;
+}
+
+.addNewDeck h3,
+.addNewDeck h4 {
+  color: grey;
+}
+
+.addNewDeck h3 {
+  font-size: 1.5rem;
+}
+
+.addNewDeck h4 {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.addNewDeck input,
+.addNewDeck button {
+  height: 2.3rem;
+  border: 0.18rem solid #2dc6f2;
+  border-radius: 0.4rem;
+}
+
+.addNewDeck input {
+  width: 13rem;
+  margin-right: 0.3rem;
+  padding-left: 1rem;
+}
+
+.addNewDeck button {
+  color: #2dc6f2;
+  background-color: #ebecee;
+  cursor: pointer;
+}
+
+.addNewDeck input,
+.addNewDeck input::placeholder {
+  color: #2dc6f2;
+  background-color: #e6e7ea;
+}
+
+.deckSection {
+  width: 60rem;
+  /* margin: 7.5rem 0; */
+  margin: 2.5rem 0;
+  padding: 2rem 2rem;
+  background-color: white;
+  border-radius: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.Deck {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 16rem;
+  margin: 1.3rem;
+  cursor: pointer;
+}
+
+.deckColor {
+  width: 16rem;
+  height: 19rem;
+  border-radius: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.1);
+}
+
+.deckColor h2 {
+  font-size: 3rem;
+  color: white;
+  margin: 0;
+}
+
+.Deck button {
+  background-color: white;
+  border: none;
+  color: lightgrey;
+  cursor: pointer;
+}
+
+.Card {
+  margin: 7.5rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* background-color: #ebecee; */
+}
+
+.Card button,
+.addCardLink {
+  width: 5rem;
+  height: 2.5rem;
+  border: 0.18rem solid #2dc6f2;
+  border-radius: 0.4rem;
+  background-color: #2dc6f2;
+  color: white;
+  cursor: pointer;
+}
+
+.Card button:disabled {
+  border: 0.18rem solid lightgray;
+  background-color: lightgray;
+  color: whitesmoke;
+}
+
+.addAndDelete {
+  display: flex;
+  /* justify-content: center; */
+  /* justify-content: space-between; */
+  margin-bottom: 4rem;
+}
+
+.addButton {
+  margin-top: 0.64rem;
+  margin-right: 40rem;
+}
+
+.addCardLink {
+  padding: 0.68rem 1.7rem;
+  font-size: 0.85rem;
+}
+
+.flashcard,
+.formSection {
+  width: 50rem;
+  height: 25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1.6rem;
+  background-color: white;
+  box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.cardBack {
+  color: #2dc6f2;
+}
+
+.backAndNext {
+  display: flex;
+  /* justify-content: space-around; */
+  margin-top: 4rem;
+}
+
+.backButton {
+  margin-right: 40rem;
+}
+
+.CardForm {
+  display: flex;
+  justify-content: center;
+  margin-top: 14rem;
+}
+
+.formContent {
+  display: flex;
+  flex-direction: column;
+}
+
+.formContent input {
+  width: 40rem;
+  height: 3rem;
+  border: 1px solid lightgrey;
+  border-radius: 0.4rem;
+  padding-left: 1rem;
+  margin-bottom: 2rem;
+}
+
+.formContent button {
+  width: 5rem;
+  height: 2.5rem;
+  border: 0.18rem solid #2dc6f2;
+  border-radius: 0.4rem;
+  background-color: #2dc6f2;
+  color: white;
+  cursor: pointer;
 }

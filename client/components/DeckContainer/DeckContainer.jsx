@@ -42,20 +42,28 @@ const DeckContainer = () => {
   };
 
   return (
-    <div>
-      {/* have an input field and an add deck button */}
-      <form onSubmit={handleSubmit}>
-        <input
-          type='text'
-          placeholder='Enter deck name'
-          value={newDeck}
-          onChange={(e) => setNewDeck(e.target.value)}
-        ></input>
-        <button type='submit'>Add deck</button>
-      </form>
+    <div className='DeckContainer'>
+      <div className='formDiv'>
+        <div className='deckSquare'>
+          <h2>Decks</h2>
+        </div>
 
-      {/* have a container that displays decks*/}
-      <section>{renderedDecks}</section>
+        <div className='addNewDeck'>
+          <h3>Flashcards</h3>
+          <h4>Add a new deck below</h4>
+          <form onSubmit={handleSubmit}>
+            <input
+              type='text'
+              placeholder='Enter deck name'
+              value={newDeck}
+              onChange={(e) => setNewDeck(e.target.value)}
+            ></input>
+            <button type='submit'>Add</button>
+          </form>
+        </div>
+      </div>
+
+      <section className='deckSection'>{renderedDecks}</section>
     </div>
   );
 };

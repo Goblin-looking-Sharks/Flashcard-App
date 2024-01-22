@@ -57,31 +57,44 @@ const Card = () => {
   };
 
   return (
-    <div>
-      <Link className='addCardLink' to={`/deck/${currentDeckID}/addCard`}>
-        Add card
-      </Link>
-      {hasCards ? (
-        <button onClick={(e) => setIsFront(!isFront)}>
-          {/* Front or back cardContent depending on state */}
-          {cardContent}
+    <div className='Card'>
+      <div className='addAndDelete'>
+        <div className='addButton'>
+          <Link className='addCardLink' to={`/deck/${currentDeckID}/addCard`}>
+            Add
+          </Link>
+        </div>
+
+        <button disabled={!hasCards} onClick={handleDelete}>
+          Delete
         </button>
+      </div>
+
+      {hasCards ? (
+        <div className='flashcard' onClick={(e) => setIsFront(!isFront)}>
+          {/* Front or back cardContent depending on state */}
+          <h2 style={{ color: isFront ? 'black' : 'grey' }}>{cardContent}</h2>
+          {!isFront ? <h3 className='cardBack'>Back of card</h3> : null}
+        </div>
       ) : null}
 
-      <button disabled={!hasCards} onClick={handleDelete}>
-        Delete
-      </button>
-
-      <div>
+      <div className='backAndNext'>
         <button
+          className='backButton'
           disabled={!hasCards || index === 0}
-          onClick={(e) => setIndex(index - 1)}
+          onClick={(e) => {
+            setIndex(index - 1);
+            setIsFront(true);
+          }}
         >
           Back
         </button>
         <button
           disabled={!hasCards || index === cards.length - 1}
-          onClick={(e) => setIndex(index + 1)}
+          onClick={(e) => {
+            setIndex(index + 1);
+            setIsFront(true);
+          }}
         >
           Next
         </button>

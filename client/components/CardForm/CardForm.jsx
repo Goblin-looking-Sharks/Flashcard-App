@@ -38,30 +38,32 @@ const CardForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        <input
-          type='text'
-          name='cardFront'
-          placeholder='Enter card front content'
-          onChange={(e) => setCardFront(e.target.value)}
-          required
-        />
-        Front of card
-      </label>
-      <label>
-        <input
-          type='text'
-          name='cardBack'
-          placeholder='Enter card back content'
-          onChange={(e) => setCardBack(e.target.value)}
-          required
-        />
-        Back of card
-      </label>
+    <div className='CardForm'>
+      <div className='formSection'>
+        <form class='formContent' onSubmit={handleSubmit}>
+          <label>
+            <input
+              type='text'
+              name='cardFront'
+              placeholder='Front of card'
+              onChange={(e) => setCardFront(e.target.value)}
+              required
+            />
+          </label>
+          <label>
+            <input
+              type='text'
+              name='cardBack'
+              placeholder='Back of card'
+              onChange={(e) => setCardBack(e.target.value)}
+              required
+            />
+          </label>
 
-      <button type='submit'>Add Card</button>
-    </form>
+          <button type='submit'>Add Card</button>
+        </form>
+      </div>
+    </div>
   );
 };
 

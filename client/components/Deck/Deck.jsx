@@ -20,9 +20,27 @@ const Deck = ({ deck, index }) => {
     if (response.status === 200) getDecks();
   };
 
+  const colorsArray = [
+    '#00A7ED',
+    '#8361F4',
+    '#E75552',
+    '#EA9823',
+    '#87CE45',
+    '#93D5F3',
+    '#29BDB6',
+  ];
+
+  const styles = {
+    backgroundColor:
+      colorsArray[Math.floor(Math.random() * colorsArray.length + 1) - 1],
+  };
+
   return (
-    <div id={`deck${index}`}>
-      <span onClick={handleDeckClick}>{deck.deckName}</span>
+    <div id={`deck${index}`} className='Deck'>
+      <div className='deckColor' onClick={handleDeckClick} style={styles}>
+        <h2>{deck.deckName}</h2>
+      </div>
+
       <button onClick={handleDelete}>Delete</button>
     </div>
   );
