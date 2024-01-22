@@ -14,7 +14,7 @@ const Deck = ({ deck, index, getDecks }) => {
     const response = await fetch(`http://localhost:3000/deck/${deck._id}`, {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
-      body: deletedDeckID,
+      // body: deletedDeckID,
     });
 
     // invoke getDecks

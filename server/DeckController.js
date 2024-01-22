@@ -59,6 +59,7 @@ router.delete('/deck/:deckId', async (req, res, next) => {
   //         message: { error: `${error}` },
   //     });
   // }
+  console.log('made it into delete');
   const deckId = req.params.deckId;
   await Deck.findByIdAndDelete(deckId)
     .then((data) => {
@@ -88,7 +89,9 @@ router.delete('/deck/:deckId', async (req, res, next) => {
 //deck name will be in the req param deckName?
 //send deck in routers in server.js
 router.get('/deck/:deckId', async (req, res, next) => {
+  console.log('whoops, shouldnt be here');
   const deckId = req.params.deckId;
+  console.log(deckId);
   await Deck.findById(deckId)
     .then((data) => {
       //if deck doesn't exist

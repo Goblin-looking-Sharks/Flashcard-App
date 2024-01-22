@@ -55,10 +55,10 @@ const DeckContainer = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const newDeckString = JSON.stringify(newDeck);
-    console.log(newDeckString);
+    const newDeckString = JSON.stringify({ deckName: newDeck, cards: [] });
+    //console.log(newDeckString);
 
-    const response = await fetch('http://localhost:3000/decks', {
+    const response = await fetch('http://localhost:3000/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: newDeckString,
@@ -77,11 +77,11 @@ const DeckContainer = () => {
       {/* have an input field and an add deck button */}
       <form onSubmit={handleSubmit}>
         <input
-          type='text'
-          placeholder='Enter deck name'
+          type="text"
+          placeholder="Enter deck name"
           onChange={(e) => setNewDeck(e.target.value)}
         ></input>
-        <button type='submit'>Add deck</button>
+        <button type="submit">Add deck</button>
       </form>
 
       {/* have a container that displays decks*/}
