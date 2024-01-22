@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { loadDecks, addDeck, deleteDeck } from '../../redux/decksSlice';
 import Deck from '../Deck/Deck.jsx';
+import { Link } from 'react-router-dom';
 
 // create component body
 const DeckContainer = () => {
@@ -43,7 +44,10 @@ const DeckContainer = () => {
   const renderedDecks = decks.map(
     // not sure if _id is the key for the id value (in the deck object)
     (deck, index) => (
-      <Deck key={deck._id} deck={deck} index={index} getDecks={getDecks} />
+      <div>
+        <Deck key={deck._id} deck={deck} index={index} getDecks={getDecks} />
+        {/* <Link to={`/deck/${deck._id}`}>Cards</Link> */}
+      </div>
     )
     // (deck, index) => (<div id={`deck${index}`} onClick={}>
     //     {deck.deckName}

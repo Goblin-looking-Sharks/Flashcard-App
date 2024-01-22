@@ -1,8 +1,16 @@
 import React from 'react';
-// import { Routes, Route, Outlet, Link } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Outlet,
+  Link,
+} from 'react-router-dom';
 import './styles.css';
 import DeckContainer from './components/DeckContainer/DeckContainer.jsx';
 import NavBar from './components/NavBar/NavBar.jsx';
+import Card from './components/Card/Card.jsx';
+import CardForm from './components/CardForm/CardForm.jsx';
 
 {
   /* <Routes>
@@ -21,14 +29,24 @@ import NavBar from './components/NavBar/NavBar.jsx';
 
 // </Routes> */}
 
+{
+  /* <div id="AppContainer">
+          <NavBar />
+          <DeckContainer />
+  </div>*/
+}
+
 const App = () => {
   return (
     // Need to install React Router, import it, and add it with the switch statements to this component
-
-    <div id='AppContainer'>
+    <>
       <NavBar />
-      <DeckContainer />
-    </div>
+      <Routes>
+        <Route path="/" element={<DeckContainer />} />
+        <Route path="/deck/:deckId" element={<Card />} />
+        <Route path="/deck/:deckId/addCard" element={<CardForm />} />
+      </Routes>
+    </>
   );
 };
 

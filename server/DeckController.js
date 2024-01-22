@@ -89,9 +89,7 @@ router.delete('/deck/:deckId', async (req, res, next) => {
 //deck name will be in the req param deckName?
 //send deck in routers in server.js
 router.get('/deck/:deckId', async (req, res, next) => {
-  console.log('whoops, shouldnt be here');
   const deckId = req.params.deckId;
-  console.log(deckId);
   await Deck.findById(deckId)
     .then((data) => {
       //if deck doesn't exist
@@ -104,7 +102,7 @@ router.get('/deck/:deckId', async (req, res, next) => {
       }
       console.log('Found Deck');
       //if deck exists, redirect to '/deck/:deckId/card'
-      res.redirect(200, '/deck/:deckId/card');
+      return res.redirect(200, '/deck/:deckId/card');
       // res.locals.getDeck = data;
       // return res.status(200).json(res.locals.getDeck);
     })

@@ -8,11 +8,15 @@ import {
   deleteCard,
 } from '../../redux/currentDeckSlice';
 
+import { useParams } from 'react-router-dom';
+
 const Card = () => {
   // get current card array from the global store
   const cards = useSelector((state) => state.currentDeck.cards);
   // get current deck ID
-  const currentDeckID = useSelector((state) => state.currentDeck.id);
+  //const currentDeckID = useSelector((state) => state.currentDeck.id);
+  const { currentDeckID } = useParams();
+  console.log(currentDeckID)
 
   // piece of state: get the boolean
   const [isFront, setIsFront] = useState(true);
@@ -54,7 +58,8 @@ const Card = () => {
 
   return (
     <div>
-      <button onClick={handleAdd}>Add card</button>
+      {/* <button onClick={handleAdd}>Add card</button> */}
+      <Link to={`/deck/${currentDeckID}/addCard`}></Link>
       {!hasCards && (
         <button onClick={(e) => setIsFront(!isFront)}>
           {/* Front or back cardContent depending on state */}
