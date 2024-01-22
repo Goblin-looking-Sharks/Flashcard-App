@@ -35,7 +35,10 @@ const DeckContainer = () => {
       body,
     });
 
-    if (response.status === 200) getDecks();
+    if (response.status === 200) {
+      await getDecks();
+      setNewDeck('');
+    }
   };
 
   return (
@@ -45,6 +48,7 @@ const DeckContainer = () => {
         <input
           type='text'
           placeholder='Enter deck name'
+          value={newDeck}
           onChange={(e) => setNewDeck(e.target.value)}
         ></input>
         <button type='submit'>Add deck</button>
