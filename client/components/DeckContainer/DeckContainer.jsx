@@ -47,22 +47,24 @@ const DeckContainer = () => {
         <div className='deckSquare'>
           <h2>Decks</h2>
         </div>
-
+        {/* Put this div within its own FORM */}
         <div className='addNewDeck'>
           <h3>Flashcards</h3>
           <h4>Add a new deck below</h4>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit}> 
             <input
               type='text'
               placeholder='Enter deck name'
               value={newDeck}
               onChange={(e) => setNewDeck(e.target.value)}
+              // this event is causing disco mode FIX THIS
+              // this should probably be onSUBMIT
+              // prevent default?
             ></input>
-            <button type='submit'>Add</button>
+            <button type='submit'>Add</button> 
           </form>
         </div>
       </div>
-
       <section className='deckSection'>{renderedDecks}</section>
     </div>
   );
