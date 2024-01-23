@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+//allows user to load, add or delete a deck
 export const decksSlice = createSlice({
   name: 'decks',
   initialState: {

@@ -33,10 +33,10 @@ const CardForm = () => {
     // redirect will need to occur from server (Automatically?)
 
     await getDecks();
-
+    //put a new card in the current deck
     navigate(`/deck/${currentDeckID}`);
   };
-
+//this creates the front of a new flashcard
   return (
     <div className='CardForm'>
       <div className='formSection'>
@@ -50,6 +50,7 @@ const CardForm = () => {
               required
             />
           </label>
+          {/* this creates the back of the new flashcard that was just created */}
           <label>
             <input
               type='text'
@@ -59,7 +60,7 @@ const CardForm = () => {
               required
             />
           </label>
-
+          {/* this button adds a card */}
           <button type='submit'>Add Card</button>
         </form>
       </div>
