@@ -1,21 +1,30 @@
 const router = require('express').Router();
 const Deck = require('./model');
 
+//potential for refactoring in this file (using next())
+
 //show card
 router.get('/:deckId/card', async (req, res) => {
   try {
-    console.log('entered get deck')
+    /* console.log('entered get deck')/*optional test*/
+    //assign params.deckId to a variable for readability
     const deckId = req.params.deckId;
-    console.log(deckId)
+    /* console.log(deckId)/*optional test*/
+    //search the database for a stored deck based on the deckID
     const deck = await Deck.findById(deckId);
+    //check if the findbyID returns null (no deck by given id)
     if (!deck) {
+      //if null, return an error
       return res.status(404).json({ error: 'Could not find deck' });
     }
-    console.log(`found deck ${deck.deckName}`);
+    /*console.log(`found deck ${deck.deckName}`);/*optional test*/
     res.json(deck);
   } catch (error) {
-    console.log('Error finding deck');
-    res.status(500).json({ error: 'Internal Server Error' });
+    next({
+      log: 'Error in getting deck by deck ID; see CardController',
+      status: 404,
+      message: {err: 'Trouble finding deck. Try again.'}
+    });
   }
 });
 
