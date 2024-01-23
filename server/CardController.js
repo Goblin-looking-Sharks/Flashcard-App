@@ -1,84 +1,86 @@
 const router = require('express').Router();
 const Deck = require('./model');
 
-//potential for refactoring in this file (using next())
 
+//>>>>THE FOLLOWING CODE IS UNNECESSARY AS OF 1/23 11:11<<<<
+//>>>>          VIEWER DISCRETION IS ADVISED            <<<<
 //show card
-router.get('/:deckId/card', async (req, res) => {
-  try {
-    /* console.log('entered get deck')/*optional test*/
-    //assign params.deckId to a variable for readability
-    const deckId = req.params.deckId;
-    /* console.log(deckId)/*optional test*/
-    //search the database for a stored deck based on the deckID
-    const deck = await Deck.findById(deckId);
-    //check if the findbyID returns null (no deck by given id)
-    if (!deck) {
-      //if null, return an error
-      return res.status(404).json({ error: 'Could not find deck' });
-    }
-    /*console.log(`found deck ${deck.deckName}`);/*optional test*/
-    res.json(deck);
-  } catch (error) {
-    next({
-      log: 'Error in getting deck by deck ID; see CardController',
-      status: 404,
-      message: {err: 'Trouble finding deck. Try again.'}
-    });
-  }
-});
+// router.get('/:deckId/card', async (req, res, next) => {
+//   try {
+//     //assign params.deckId to a variable for readability
+//     const deckId = req.params.deckId;
+//     //search the database for a stored deck based on the deckID
+//     const deck = await Deck.findById(deckId);
+//     //check if the findbyID returns null (no deck by given id)
+//     if (!deck) {
+//       //if null, return an error
+//       return res.status(404).json({ error: 'Could not find deck' });
+//     }
+//     //return the deck as a json object
+//     res.json(deck);
+//   } catch (error) {
+//     next({
+//       log: `Caught error in CardController GET middleware: ${error}`,
+//       status: 404,
+//       message: {err: 'Trouble retrieving the card from this deck. Try again'}
+//     });
+//   }
+// });
 
 //create card
-router.post('/:deckId/card', async (req, res) => {
+router.post('/:deckId/card', async (req, res, next) => {
   try {
+    //assign params.deckId to a variable for readability
     const deckId = req.params.deckId;
+    //retrieve deck and assign it to variable
     const deck = await Deck.findById(deckId);
-    // console.log(deck);
+    //check if no deck was found
+    //>>>>the following code seems to never be read in case of an invalid deckID; not sure why<<<<
+    // if (!deck) {
+    //   return res.status(404).json({ error: 'Could not find deck' });
+    // }
+    //>>>>                           above code deprecated                                    <<<<
+    //once deck is retrieved, destructure the request body into front and back
     const { front, back } = req.body;
-    // console.log('front', front);
-    // console.log('back', back);
-    if (!deck) {
-      return res.status(404).json({ error: 'Could not find deck' });
-    }
-    // console.log('deck cards', deck.cards);
+    //push into retrieved deck's array a new object containing front and back entries from request body
     deck.cards.push({ front, back });
-    // console.log('after pushing new card', deck.cards);
+    //update the modified deck
     await deck.save();
-    // console.log('created card');
+    //redirect to GET in deckController
     res.redirect('/');
   } catch (error) {
+    //if an error is caught, send to global error handler
     next({
-      log: '',
-      error: 400,
-      message: '',
+      log: `Caught error in CardController POST middleware: ${error}`,
+      status: 400,
+      message: 'Trouble adding new card to this deck. Try again.',
     });
   }
 });
 
 //delete card
-router.delete('/:deckId/card', async (req, res) => {
+router.delete('/:deckId/card', async (req, res, next) => {
   try {
+    //assign params.deckId to a variable for readability
     const deckId = req.params.deckId;
-    // const deck = await Deck.findById(deckId);
-    // console.log('deckID',deckId)
+    //destructure the id of the card to be deleted from the request body
     const { deletedCardID } = req.body;
-    console.log('deletedCardID', deletedCardID);
-    // console.log('find card?', Deck.findById(deletedCardID))
-    // await Deck.findOneAndDelete({_id: deckId, 'cards._id': deletedCardID});
-
+    //update the deck to have the requested card removed
     await Deck.updateOne(
+      //find the card with a matching id
       { _id: deckId },
+      //pull said card
       { $pull: { cards: { _id: deletedCardID } } }
     );
-    // console.log('card',card)
-    // if (!card) {
-    //   return res.status(404).json({ error: 'Could not find card' });
-    // }
-    // console.log('deleted card');
+    //redirect to GET in deckController
     res.redirect('/');
   } catch (error) {
-    console.log('Error deleting card');
-    res.status(500).json({ error: 'Internal Server Error' });
+    //if an error is caught, send to global error handler
+    next({
+      log: `Caught error in CardController DELETE middleware: ${error}`,
+      status: 400,
+      message: 'Trouble adding new card to this deck. Try again.',
+    });
   }
 });
 

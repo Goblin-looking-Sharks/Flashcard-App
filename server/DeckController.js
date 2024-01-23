@@ -17,10 +17,6 @@ router.get('/', async (req, res, next) => {
 //deck info will be sent in req body
 //send created deck in routers in server.js
 router.post('/', (req, res, next) => {
-  const { deckName, cards } = req.body;
-  console.log('deck:', deckName);
-  console.log('cards', cards);
-  console.log('is this working?');
   Deck.create(req.body) //
     .then((data) => {
       res.locals.newDeck = data;
