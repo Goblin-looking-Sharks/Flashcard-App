@@ -89,6 +89,13 @@ const Card = () => {
         >
           Back
         </button>
+
+        {/* shuffle button */}
+        <button >
+
+          Shuffle
+        </button>
+
         <button
           disabled={!hasCards || index === cards.length - 1}
           onClick={(e) => {
