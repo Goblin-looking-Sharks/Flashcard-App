@@ -20,6 +20,10 @@ const deckSchema = new mongoose.Schema({
   cards: [cardSchema], // array of cards, each card is an obj
 });
 
+const userSchema = new mongoose.Schema({
+  username: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
+});
 // const Deck = mongoose.model('Deck', deckSchema);
 // // const Card = mongoose.model('Card', cardSchema, 'Deck');
 
@@ -27,5 +31,7 @@ const deckSchema = new mongoose.Schema({
 //     Deck,
 //     // Card,
 // };
+const Deck = mongoose.model('Deck', deckSchema, 'Deck');
+const User = mongoose.model('User', userSchema, 'User');
 
-module.exports = mongoose.model('Deck', deckSchema, 'Deck');
+module.exports = { Deck, User };
