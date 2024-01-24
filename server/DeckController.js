@@ -6,7 +6,7 @@ const router = require('express').Router();
 // GET '/'
 
 router.get('/', async (req, res, next) => {
-  console.log('sucessful get');
+  console.log('successful get');
 
   const getDecks = await Deck.find();
   return res.status(200).json(getDecks);
