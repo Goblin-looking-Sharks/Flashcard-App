@@ -4,7 +4,7 @@ const Deck = require('./model');
 
 //>>>>THE FOLLOWING CODE IS UNNECESSARY AS OF 1/23 11:11<<<<
 //>>>>          VIEWER DISCRETION IS ADVISED            <<<<
-//show card
+// //show card
 // router.get('/:deckId/card', async (req, res, next) => {
 //   try {
 //     //assign params.deckId to a variable for readability
